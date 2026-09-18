@@ -1,0 +1,41 @@
+# robots.txt for CRIVORRA (https://crivorra.com)
+# Optimized for Googlebot, Bingbot, and Global Search Crawlers
+
+User-agent: Googlebot
+Allow: /
+Allow: /assets/
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /*.mp4$
+
+User-agent: Googlebot-Image
+Allow: /
+Allow: /assets/
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.svg$
+Allow: /*.webp$
+
+User-agent: Bingbot
+Allow: /
+Allow: /assets/
+
+User-agent: Applebot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Host
+Host: https://crivorra.com
+
+# XML Sitemaps
+Sitemap: https://crivorra.com/sitemap.xml
