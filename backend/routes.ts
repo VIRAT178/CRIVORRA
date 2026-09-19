@@ -71,6 +71,15 @@ apiRouter.post('/project-inquiry', async (req: Request, res: Response) => {
     // Dispatch emails through Brevo
     const emailResult = await sendProjectInquiryEmails(sanitizedData);
 
+    if (!emailResult.success) {
+      console.error('[API /project-inquiry] Email delivery failed:', emailResult.error || 'Unknown Brevo error');
+      res.status(502).json({
+        success: false,
+        error: emailResult.error || 'The inquiry was received, but email delivery failed. Please try again.',
+      });
+      return;
+    }
+
     res.status(200).json({
       success: true,
       message: 'Your inquiry has been successfully received.',
@@ -78,6 +87,7 @@ apiRouter.post('/project-inquiry', async (req: Request, res: Response) => {
         adminEmailSent: emailResult.adminEmailSent,
         clientEmailSent: emailResult.clientEmailSent,
         simulated: !process.env.BREVO_API_KEY && !process.env.BRAVO_API_KEY,
+        emailError: emailResult.error,
       },
     });
   } catch (error: any) {
