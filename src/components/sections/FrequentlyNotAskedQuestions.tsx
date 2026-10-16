@@ -7,6 +7,7 @@ import {
   Maximize2,
   Volume2,
 } from 'lucide-react';
+import whatIsSeoVideo from '../../../whatisseo.mp4';
 
 export interface FNAQItem {
   id: string;
@@ -26,7 +27,7 @@ export const FNAQ_DATA: FNAQItem[] = [
     id: 'q2',
     number: '02',
     question: 'What is SEO and why it is Necessary?',
-    videoUrl: '/whatisseo',
+    videoUrl: whatIsSeoVideo,
   },
   {
     id: 'q3',
@@ -355,4 +356,3 @@ export const FrequentlyNotAskedQuestions: React.FC = () => {
     </section>
   );
 };
-
