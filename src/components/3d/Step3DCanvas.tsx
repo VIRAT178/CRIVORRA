@@ -260,13 +260,15 @@ export const Step3DCanvas: React.FC<Step3DCanvasProps> = ({
     }
 
     // Animation Loop
-    let clock = new THREE.Clock();
+    const timer = new THREE.Timer();
+    timer.connect(document);
 
     const animate = () => {
       animFrameRef.current = requestAnimationFrame(animate);
 
-      const delta = clock.getDelta();
-      const elapsed = clock.getElapsedTime();
+      timer.update();
+      const delta = timer.getDelta();
+      const elapsed = timer.getElapsed();
 
       const active = isActiveRef.current;
       const hovered = isHoveredRef.current;
@@ -319,6 +321,7 @@ export const Step3DCanvas: React.FC<Step3DCanvasProps> = ({
       if (animFrameRef.current) {
         cancelAnimationFrame(animFrameRef.current);
       }
+      timer.dispose();
       try {
         renderer.dispose();
         if (renderer.domElement && container.contains(renderer.domElement)) {
