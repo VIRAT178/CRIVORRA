@@ -742,11 +742,13 @@ export const OurApproachCanvas3D: React.FC<OurApproachCanvas3DProps> = ({
     resizeObserver.observe(container);
 
     // 8. ANIMATION LOOP
-    const clock = new THREE.Clock();
+    const timer = new THREE.Timer();
+    timer.connect(document);
 
     const render = () => {
       animFrameRef.current = requestAnimationFrame(render);
-      const elapsed = clock.getElapsedTime();
+      timer.update();
+      const elapsed = timer.getElapsed();
 
       // Camera smooth lerp
       camera.position.z += (targetCameraZ - camera.position.z) * 0.08;
@@ -867,6 +869,7 @@ export const OurApproachCanvas3D: React.FC<OurApproachCanvas3DProps> = ({
       if (animFrameRef.current) {
         cancelAnimationFrame(animFrameRef.current);
       }
+      timer.dispose();
       container.removeEventListener('mousemove', handlePointerMove);
       container.removeEventListener('click', handleClick);
       resizeObserver.disconnect();
