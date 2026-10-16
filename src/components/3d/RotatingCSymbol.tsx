@@ -78,10 +78,12 @@ export const RotatingCSymbol: React.FC<{ className?: string }> = ({ className = 
     cGroup.add(ringMesh);
 
     // Slow majestic rotation
-    let clock = new THREE.Clock();
+    const timer = new THREE.Timer();
+    timer.connect(document);
     const animate = () => {
       animId = requestAnimationFrame(animate);
-      const t = clock.getElapsedTime();
+      timer.update();
+      const t = timer.getElapsed();
       cGroup.rotation.y = t * 0.25;
       cGroup.rotation.x = Math.sin(t * 0.18) * 0.15;
       cGroup.rotation.z = Math.cos(t * 0.15) * 0.1;
@@ -105,6 +107,7 @@ export const RotatingCSymbol: React.FC<{ className?: string }> = ({ className = 
 
     return () => {
       cancelAnimationFrame(animId);
+      timer.dispose();
       resizeObserver.disconnect();
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
@@ -123,3 +126,4 @@ export const RotatingCSymbol: React.FC<{ className?: string }> = ({ className = 
     </div>
   );
 };
+
