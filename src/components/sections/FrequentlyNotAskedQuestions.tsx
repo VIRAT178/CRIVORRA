@@ -26,7 +26,7 @@ export const FNAQ_DATA: FNAQItem[] = [
     id: 'q2',
     number: '02',
     question: 'What is SEO and why it is Necessary?',
-    videoUrl: 'https://www.youtube-nocookie.com/embed/DvwS7cV9GmQ?autoplay=1',
+    videoUrl: '/whatisseo',
   },
   {
     id: 'q3',
