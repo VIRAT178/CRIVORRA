@@ -291,11 +291,13 @@ export const EcosystemCanvas: React.FC<EcosystemCanvasProps> = ({
     resizeObserver.observe(container);
 
     // 9. ANIMATION LOOP
-    let clock = new THREE.Clock();
+    const timer = new THREE.Timer();
+    timer.connect(document);
 
     const renderLoop = () => {
       animFrameRef.current = requestAnimationFrame(renderLoop);
-      const elapsedTime = clock.getElapsedTime();
+      timer.update();
+      const elapsedTime = timer.getElapsed();
 
       // Smooth mouse damping
       mouseRef.current.x += (mouseRef.current.targetX - mouseRef.current.x) * 0.06;
@@ -464,6 +466,7 @@ export const EcosystemCanvas: React.FC<EcosystemCanvasProps> = ({
       if (animFrameRef.current) {
         cancelAnimationFrame(animFrameRef.current);
       }
+      timer.dispose();
       container.removeEventListener('mousemove', handleMouseMove);
       container.removeEventListener('mouseleave', handleMouseLeave);
       window.removeEventListener('resize', handleResize);
@@ -484,3 +487,4 @@ export const EcosystemCanvas: React.FC<EcosystemCanvasProps> = ({
     />
   );
 };
+
