@@ -249,10 +249,12 @@ export const HeroCrivorraCanvas: React.FC = () => {
     resizeObserver.observe(container);
 
     // Animation Loop
-    let clock = new THREE.Clock();
+    const timer = new THREE.Timer();
+    timer.connect(document);
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
-      const elapsedTime = clock.getElapsedTime();
+      timer.update();
+      const elapsedTime = timer.getElapsed();
 
       // Smooth interpolation for mouse parallax
       currentRotationX += (targetRotationX + scrollTilt - currentRotationX) * 0.04;
@@ -288,6 +290,7 @@ export const HeroCrivorraCanvas: React.FC = () => {
     // Cleanup
     return () => {
       cancelAnimationFrame(animationFrameId);
+      timer.dispose();
       window.removeEventListener('pointermove', handlePointerMove);
       window.removeEventListener('scroll', handleScroll);
       resizeObserver.disconnect();
