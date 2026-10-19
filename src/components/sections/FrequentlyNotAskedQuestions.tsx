@@ -8,6 +8,7 @@ import {
   Volume2,
 } from 'lucide-react';
 import whatIsSeoVideo from '../../../whatisseo.mp4';
+import whatIsDM from '../../../whatisDM (1).mov';
 
 export interface FNAQItem {
   id: string;
@@ -21,7 +22,7 @@ export const FNAQ_DATA: FNAQItem[] = [
     id: 'q1',
     number: '01',
     question: 'What is Digital Marketing?',
-    videoUrl: '/digitalmarketing.mp4',
+    videoUrl: whatIsDM,
   },
   {
     id: 'q2',
