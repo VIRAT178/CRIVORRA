@@ -8,7 +8,7 @@ import {
   Volume2,
 } from 'lucide-react';
 import whatIsSeoVideo from '../../../whatisseo.mp4';
-import whatIsDM from '../../../whatisDM (1).mov';
+import whatIsDM from '../../../whatisDM (1).mp4';
 
 export interface FNAQItem {
   id: string;
