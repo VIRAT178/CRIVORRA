@@ -11,6 +11,7 @@ import whatIsSeoVideo from '../../../whatisseo.mp4';
 import whatIsDM from '../../../whatisDM (1).mp4';
 import whatIsGMB from '../../../Q3.mp4';
 import WhatIsSMM from '../../../WhatIsSMM.mp4';
+import WhatIsGEO from '../../../WhatIsGEO&SEO.mp4';
 
 export interface FNAQItem {
   id: string;
@@ -48,7 +49,7 @@ export const FNAQ_DATA: FNAQItem[] = [
     id: 'q5',
     number: '05',
     question: 'What is GEO/AEO and why it is Necessary?',
-    videoUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1',
+    videoUrl: WhatIsGEO,
   },
   {
     id: 'q6',
