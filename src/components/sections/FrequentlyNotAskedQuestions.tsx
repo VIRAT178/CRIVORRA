@@ -10,6 +10,7 @@ import {
 import whatIsSeoVideo from '../../../whatisseo.mp4';
 import whatIsDM from '../../../whatisDM (1).mp4';
 import whatIsGMB from '../../../Q3.mp4';
+import WhatIsSMM from '../../../WhatIsSMM.mp4';
 
 export interface FNAQItem {
   id: string;
@@ -41,7 +42,7 @@ export const FNAQ_DATA: FNAQItem[] = [
     id: 'q4',
     number: '04',
     question: 'What is social media marketing and why it is Necessary?',
-    videoUrl: 'https://www.youtube-nocookie.com/embed/F4q_3nO_F1o?autoplay=1',
+    videoUrl: WhatIsSMM,
   },
   {
     id: 'q5',
