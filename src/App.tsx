@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Lenis from 'lenis';
 import { Navbar } from './components/layout/Navbar';
 import { HeroSection } from './components/sections/HeroSection';
+import { IntroVideoSection } from './components/sections/IntroVideoSection';
 import { DigitalGrowthEcosystem } from './components/sections/DigitalGrowthEcosystem';
 import { FrequentlyNotAskedQuestions } from './components/sections/FrequentlyNotAskedQuestions';
 import { OurApproachSection } from './components/sections/OurApproachSection';
@@ -125,6 +126,9 @@ export default function App() {
           <>
             {/* Full-Screen Premium Hero with 3D CRIVORRA C Growth Engine */}
             <HeroSection onOpenProjectPlanner={() => setIsProjectPlannerOpen(true)} />
+
+            {/* Crivorra Digitals introduction in a desktop-style video frame */}
+            <IntroVideoSection />
 
             {/* 3D DIGITAL GROWTH ECOSYSTEM: Central CRIVORRA Hub & 8 Orbiting Services */}
             <DigitalGrowthEcosystem onOpenProjectPlanner={() => setIsProjectPlannerOpen(true)} />
