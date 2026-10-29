@@ -6,7 +6,7 @@ export const IntroVideoSection: React.FC = () => {
   return (
     <section
       aria-labelledby="crivorra-video-heading"
-      className="relative overflow-hidden bg-[#070B19] bg-grid-dark px-4 py-16 text-white sm:px-6 sm:py-20 lg:px-8 lg:py-24"
+      className="relative overflow-hidden bg-[#070B19] bg-grid-dark px-4 py-12 text-white sm:px-6 sm:py-14 lg:px-8 lg:py-16"
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_35%,rgba(0,102,255,0.18),transparent_58%)]" />
 
@@ -17,14 +17,14 @@ export const IntroVideoSection: React.FC = () => {
         </div>
         <h2
           id="crivorra-video-heading"
-          className="mx-auto mb-8 max-w-4xl font-display text-3xl font-black leading-tight tracking-tight sm:mb-10 sm:text-4xl lg:text-5xl"
+          className="mx-auto mb-6 max-w-3xl font-display text-2xl font-black leading-tight tracking-tight sm:mb-7 sm:text-3xl lg:text-4xl"
         >
           See how Crivorra Digitals helps your business grow
         </h2>
 
-        <div className="mx-auto max-w-6xl">
-          <div className="rounded-[1.5rem] border border-slate-600/70 bg-slate-700 p-2 shadow-[0_30px_90px_-28px_rgba(0,102,255,0.45)] sm:rounded-[2rem] sm:p-3">
-            <div className="flex h-9 items-center justify-between px-2 sm:h-12 sm:px-4">
+        <div className="mx-auto max-w-4xl">
+          <div className="rounded-2xl border border-slate-600/70 bg-slate-700 p-1.5 shadow-[0_24px_70px_-28px_rgba(0,102,255,0.4)] sm:rounded-3xl sm:p-2">
+            <div className="flex h-8 items-center justify-between px-2 sm:h-10 sm:px-3">
               <div className="flex items-center gap-1.5 sm:gap-2">
                 <span className="h-2.5 w-2.5 rounded-full bg-orange-500 sm:h-3 sm:w-3" />
                 <span className="h-2.5 w-2.5 rounded-full bg-yellow-400 sm:h-3 sm:w-3" />
@@ -41,6 +41,7 @@ export const IntroVideoSection: React.FC = () => {
                 className="block aspect-video h-auto w-full bg-black object-contain"
                 src={crivorraDigitalsVideo}
                 controls
+                autoPlay
                 preload="metadata"
                 playsInline
                 aria-label="Crivorra Digitals introduction video"
