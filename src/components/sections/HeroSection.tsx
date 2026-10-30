@@ -38,7 +38,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenProjectPlanner }
 
   return (
     <section
-      id="home"
+      id="hero"
       className="relative h-full min-h-[90vh] lg:min-h-screen pt-24 sm:pt-28 lg:pt-32 pb-12 sm:pb-16 overflow-hidden bg-[#FCFCFD] bg-grid-subtle flex flex-col justify-center"
     >
       {/* Abstract subtle background brand shapes */}

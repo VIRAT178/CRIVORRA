@@ -124,11 +124,11 @@ export default function App() {
           />
         ) : (
           <>
-            {/* Full-Screen Premium Hero with 3D CRIVORRA C Growth Engine */}
-            <HeroSection onOpenProjectPlanner={() => setIsProjectPlannerOpen(true)} />
-
             {/* Crivorra Digitals introduction in a desktop-style video frame */}
             <IntroVideoSection />
+
+            {/* Full-Screen Premium Hero with 3D CRIVORRA C Growth Engine */}
+            <HeroSection onOpenProjectPlanner={() => setIsProjectPlannerOpen(true)} />
 
             {/* 3D DIGITAL GROWTH ECOSYSTEM: Central CRIVORRA Hub & 8 Orbiting Services */}
             <DigitalGrowthEcosystem onOpenProjectPlanner={() => setIsProjectPlannerOpen(true)} />
