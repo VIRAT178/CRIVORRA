@@ -20,7 +20,7 @@ export const IntroVideoSection: React.FC = () => {
     <section
       id="home"
       aria-labelledby="crivorra-video-heading"
-      className="relative overflow-hidden bg-[#070B19] bg-grid-dark px-4 pb-10 pt-28 text-white sm:px-6 sm:pb-12 sm:pt-32 lg:bg-white lg:bg-grid-subtle lg:px-8 lg:text-[#0A0F1D]"
+      className="relative overflow-hidden bg-white bg-grid-subtle px-4 pb-10 pt-28 text-[#0A0F1D] sm:px-6 sm:pb-12 sm:pt-32 lg:px-8"
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_35%,rgba(0,102,255,0.18),transparent_58%)]" />
 
