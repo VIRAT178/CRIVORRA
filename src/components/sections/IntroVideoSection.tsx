@@ -3,6 +3,7 @@ import crivorraDigitalsVideo from '../../../Crivorra Digitals.mp4';
 
 export const IntroVideoSection: React.FC = () => {
   const videoRef = React.useRef<HTMLVideoElement | null>(null);
+  const [playbackError, setPlaybackError] = React.useState(false);
 
   React.useEffect(() => {
     const handleOtherVideoPlay = (event: Event) => {
@@ -50,6 +51,19 @@ export const IntroVideoSection: React.FC = () => {
                 preload="metadata"
                 playsInline
                 aria-label="Crivorra Digitals introduction video"
+                onClick={(event) => {
+                  const video = event.currentTarget;
+                  if (video.muted) {
+                    video.muted = false;
+                    void video.play().then(
+                      () => setPlaybackError(false),
+                      () => {
+                        video.muted = true;
+                        setPlaybackError(true);
+                      },
+                    );
+                  }
+                }}
                 onPlay={(event) => {
                   window.dispatchEvent(
                     new CustomEvent('crivorra:video-play', { detail: event.currentTarget }),
@@ -59,6 +73,11 @@ export const IntroVideoSection: React.FC = () => {
                 Your browser does not support the video tag.
               </video>
             </div>
+            {playbackError && (
+              <p className="mt-2 text-sm text-red-700" role="alert">
+                Could not start video with sound. Use the video controls to try again.
+              </p>
+            )}
           </div>
           <div className="mx-auto hidden h-5 w-1/3 rounded-b-xl bg-gradient-to-b from-slate-700 to-slate-800 sm:block sm:h-7" />
           <div className="mx-auto hidden h-2 w-2/3 rounded-full bg-slate-700 sm:block sm:h-3" />
