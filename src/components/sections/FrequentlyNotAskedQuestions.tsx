@@ -7,12 +7,12 @@ import {
   Maximize2,
   Volume2,
 } from 'lucide-react';
-import whatIsSeoVideo from '../../../whatisseo.mp4';
-import whatIsDM from '../../../whatisDM (1).mp4';
-import whatIsGMB from '../../../Q3.mp4';
-import WhatIsSMM from '../../../WhatIsSMM.mp4';
-import WhatIsGEO from '../../../WhatIsGEO&SEO.mp4';
-import HowToGML from '../../../HowToGML.mp4';
+import q1Video from '../../../Q1.mp4';
+import q2Video from '../../../Q2.mp4';
+import q3Video from '../../../Q3.mp4';
+import q4Video from '../../../Q4.mp4';
+import q5Video from '../../../Q5.mp4';
+import q6Video from '../../../Q6.mp4';
 
 export interface FNAQItem {
   id: string;
@@ -26,37 +26,37 @@ export const FNAQ_DATA: FNAQItem[] = [
     id: 'q1',
     number: '01',
     question: 'What is Digital Marketing?',
-    videoUrl: whatIsDM,
+    videoUrl: q1Video,
   },
   {
     id: 'q2',
     number: '02',
     question: 'What is SEO and why it is Necessary?',
-    videoUrl: whatIsSeoVideo,
+    videoUrl: q2Video,
   },
   {
     id: 'q3',
     number: '03',
     question: 'What is GMB and why it is Necessary?',
-    videoUrl: whatIsGMB,
+    videoUrl: q3Video,
   },
   {
     id: 'q4',
     number: '04',
     question: 'What is social media marketing and why it is Necessary?',
-    videoUrl: WhatIsSMM,
+    videoUrl: q4Video,
   },
   {
     id: 'q5',
     number: '05',
     question: 'What is GEO/AEO and why it is Necessary?',
-    videoUrl: WhatIsGEO,
+    videoUrl: q5Video,
   },
   {
     id: 'q6',
     number: '06',
     question: 'How to get maximum leads?',
-    videoUrl: HowToGML,
+    videoUrl: q6Video,
   },
 ];
 
