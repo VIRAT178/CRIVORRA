@@ -15,12 +15,6 @@ export const IntroVideoSection: React.FC = () => {
           <MonitorPlay className="h-4 w-4" aria-hidden="true" />
           GET TO KNOW US
         </div>
-        <h2
-          id="crivorra-video-heading"
-          className="mx-auto mb-6 max-w-3xl font-display text-2xl font-black leading-tight tracking-tight sm:mb-7 sm:text-3xl lg:text-4xl"
-        >
-          See how Crivorra Digitals helps your business grow
-        </h2>
 
         <div className="mx-auto max-w-4xl">
           <div className="rounded-2xl border border-slate-600/70 bg-slate-700 p-1.5 shadow-[0_24px_70px_-28px_rgba(0,102,255,0.4)] sm:rounded-3xl sm:p-2">
