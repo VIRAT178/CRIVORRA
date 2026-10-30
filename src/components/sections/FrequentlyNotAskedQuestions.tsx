@@ -71,9 +71,26 @@ export const FrequentlyNotAskedQuestions: React.FC = () => {
     if (activeOpenIdx === idx) {
       setActiveOpenIdx(null);
     } else {
+      window.dispatchEvent(new CustomEvent('crivorra:video-play', { detail: null }));
       setActiveOpenIdx(idx);
     }
   };
+
+  useEffect(() => {
+    const handleOtherVideoPlay = (event: Event) => {
+      const playingVideo = (event as CustomEvent<HTMLVideoElement | null>).detail;
+      Object.keys(inlineVideoRefs.current).forEach((key) => {
+        const video = inlineVideoRefs.current[key];
+        if (video && video !== playingVideo) video.pause();
+      });
+      if (popupVideoRef.current && popupVideoRef.current !== playingVideo) {
+        popupVideoRef.current.pause();
+      }
+    };
+
+    window.addEventListener('crivorra:video-play', handleOtherVideoPlay);
+    return () => window.removeEventListener('crivorra:video-play', handleOtherVideoPlay);
+  }, []);
 
   // Close popup modal on Escape key
   useEffect(() => {
@@ -233,6 +250,10 @@ export const FrequentlyNotAskedQuestions: React.FC = () => {
                             type="button"
                             onClick={(e) => {
                               e.stopPropagation();
+                              window.dispatchEvent(
+                                new CustomEvent('crivorra:video-play', { detail: null }),
+                              );
+                              setActiveOpenIdx(null);
                               setPopupVideoItem(item);
                             }}
                             className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white text-xs font-mono-code transition-colors cursor-pointer"
@@ -273,6 +294,13 @@ export const FrequentlyNotAskedQuestions: React.FC = () => {
                             autoPlay
                             playsInline
                             className="w-full h-full object-contain bg-black"
+                            onPlay={(event) => {
+                              window.dispatchEvent(
+                                new CustomEvent('crivorra:video-play', {
+                                  detail: event.currentTarget,
+                                }),
+                              );
+                            }}
                           />
                         ) : (
                           <iframe
@@ -343,6 +371,13 @@ export const FrequentlyNotAskedQuestions: React.FC = () => {
                   autoPlay
                   playsInline
                   className="w-full h-full object-contain bg-black"
+                  onPlay={(event) => {
+                    window.dispatchEvent(
+                      new CustomEvent('crivorra:video-play', {
+                        detail: event.currentTarget,
+                      }),
+                    );
+                  }}
                 />
               ) : (
                 <iframe

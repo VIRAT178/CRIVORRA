@@ -1,8 +1,21 @@
 import React from 'react';
-import { MonitorPlay } from 'lucide-react';
 import crivorraDigitalsVideo from '../../../Crivorra Digitals.mp4';
 
 export const IntroVideoSection: React.FC = () => {
+  const videoRef = React.useRef<HTMLVideoElement | null>(null);
+
+  React.useEffect(() => {
+    const handleOtherVideoPlay = (event: Event) => {
+      const playingVideo = (event as CustomEvent<HTMLVideoElement | null>).detail;
+      if (playingVideo !== videoRef.current) {
+        videoRef.current?.pause();
+      }
+    };
+
+    window.addEventListener('crivorra:video-play', handleOtherVideoPlay);
+    return () => window.removeEventListener('crivorra:video-play', handleOtherVideoPlay);
+  }, []);
+
   return (
     <section
       id="home"
@@ -12,11 +25,6 @@ export const IntroVideoSection: React.FC = () => {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_35%,rgba(0,102,255,0.18),transparent_58%)]" />
 
       <div className="relative mx-auto max-w-screen-2xl text-center">
-        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-bold tracking-[0.18em] text-orange-300 sm:text-sm">
-          <MonitorPlay className="h-4 w-4" aria-hidden="true" />
-          GET TO KNOW US
-        </div>
-
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto w-full max-w-[280px] rounded-[2.25rem] border border-slate-600/70 bg-slate-700 p-2 shadow-[0_24px_70px_-28px_rgba(0,102,255,0.4)] sm:max-w-none sm:rounded-3xl sm:p-2">
             <div className="flex h-9 items-center justify-between px-2 sm:h-10 sm:px-3">
@@ -33,6 +41,7 @@ export const IntroVideoSection: React.FC = () => {
 
             <div className="aspect-[9/16] overflow-hidden rounded-[1.5rem] bg-black sm:aspect-[2.8/1] sm:rounded-2xl">
               <video
+                ref={videoRef}
                 className="block h-full w-full bg-black object-contain"
                 src={crivorraDigitalsVideo}
                 controls
@@ -40,6 +49,11 @@ export const IntroVideoSection: React.FC = () => {
                 preload="metadata"
                 playsInline
                 aria-label="Crivorra Digitals introduction video"
+                onPlay={(event) => {
+                  window.dispatchEvent(
+                    new CustomEvent('crivorra:video-play', { detail: event.currentTarget }),
+                  );
+                }}
               >
                 Your browser does not support the video tag.
               </video>
