@@ -46,6 +46,7 @@ export const IntroVideoSection: React.FC = () => {
                 src={crivorraDigitalsVideo}
                 controls
                 autoPlay
+                muted
                 preload="metadata"
                 playsInline
                 aria-label="Crivorra Digitals introduction video"
