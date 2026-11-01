@@ -18,7 +18,7 @@ import q3Video from '../../../Q3.mp4';
 import q4Video from '../../../Q4.mp4';
 import q5Video from '../../../Q5.mp4';
 import q6Video from '../../../Q6.mp4';
-import digitalmarketingVideo from '../../../digitalmarketing.mp4';
+import digitalmarketingVideo from '../../../Crivorra Digitals.mp4';
 
 interface DigitalGrowthEcosystemProps {
   onOpenProjectPlanner?: () => void;
