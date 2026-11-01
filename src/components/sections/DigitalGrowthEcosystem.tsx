@@ -8,9 +8,17 @@ import {
   TrendingUp,
   Cpu,
   BarChart3,
+  X,
 } from 'lucide-react';
 import { BrandLogo } from '../common/BrandLogo';
 import { EcosystemCanvas, ServicePosition3D } from '../3d/EcosystemCanvas';
+import q1Video from '../../../Q1.mp4';
+import q2Video from '../../../Q2.mp4';
+import q3Video from '../../../Q3.mp4';
+import q4Video from '../../../Q4.mp4';
+import q5Video from '../../../Q5.mp4';
+import q6Video from '../../../Q6.mp4';
+import digitalmarketingVideo from '../../../digitalmarketing.mp4';
 
 interface DigitalGrowthEcosystemProps {
   onOpenProjectPlanner?: () => void;
@@ -28,6 +36,7 @@ export interface EcosystemServiceItem {
   borderHover: string;
   bgGlow: string;
   icon: React.ElementType;
+  videoUrl?: string;
 }
 
 export const ECOSYSTEM_SERVICES: EcosystemServiceItem[] = [
@@ -43,6 +52,7 @@ export const ECOSYSTEM_SERVICES: EcosystemServiceItem[] = [
     borderHover: 'hover:border-[#FF0080]/80',
     bgGlow: 'from-[#7928CA]/15 to-[#FF0080]/5',
     icon: Share2,
+    videoUrl: q4Video,
   },
   {
     id: 'brand-management',
@@ -56,6 +66,7 @@ export const ECOSYSTEM_SERVICES: EcosystemServiceItem[] = [
     borderHover: 'hover:border-[#00D2FF]/80',
     bgGlow: 'from-[#0066FF]/15 to-[#00D2FF]/5',
     icon: Sparkles,
+    videoUrl: q1Video,
   },
   {
     id: 'search-engine-optimisation',
@@ -69,6 +80,7 @@ export const ECOSYSTEM_SERVICES: EcosystemServiceItem[] = [
     borderHover: 'hover:border-[#0066FF]/80',
     bgGlow: 'from-[#0066FF]/15 to-[#2563EB]/5',
     icon: Globe,
+    videoUrl: q2Video,
   },
   {
     id: 'google-my-business',
@@ -82,6 +94,7 @@ export const ECOSYSTEM_SERVICES: EcosystemServiceItem[] = [
     borderHover: 'hover:border-[#FF5E1E]/80',
     bgGlow: 'from-[#FF5E1E]/15 to-[#FF3366]/5',
     icon: MapPin,
+    videoUrl: q3Video,
   },
   {
     id: 'meta-ad-run',
@@ -108,6 +121,7 @@ export const ECOSYSTEM_SERVICES: EcosystemServiceItem[] = [
     borderHover: 'hover:border-[#EA4335]/80',
     bgGlow: 'from-[#EA4335]/15 to-[#FBBC05]/5',
     icon: TrendingUp,
+    videoUrl: q6Video,
   },
   {
     id: 'geo-aeo',
@@ -121,6 +135,7 @@ export const ECOSYSTEM_SERVICES: EcosystemServiceItem[] = [
     borderHover: 'hover:border-[#7928CA]/80',
     bgGlow: 'from-[#7928CA]/15 to-[#00D2FF]/5',
     icon: Cpu,
+    videoUrl: q5Video,
   },
   {
     id: 'google-analytics',
@@ -134,6 +149,7 @@ export const ECOSYSTEM_SERVICES: EcosystemServiceItem[] = [
     borderHover: 'hover:border-[#F59E0B]/80',
     bgGlow: 'from-[#F59E0B]/15 to-[#FF5E1E]/5',
     icon: BarChart3,
+    videoUrl: digitalmarketingVideo,
   },
 ];
 
@@ -155,6 +171,7 @@ export const DigitalGrowthEcosystem: React.FC<DigitalGrowthEcosystemProps> = ({
   const [isHovered, setIsHovered] = useState(false);
   const [hoveredServiceIndex, setHoveredServiceIndex] = useState<number | null>(null);
   const [activeServiceIndex, setActiveServiceIndex] = useState<number | null>(null);
+  const [videoService, setVideoService] = useState<EcosystemServiceItem | null>(null);
   const [servicePositions, setServicePositions] = useState<ServicePosition3D[]>([]);
 
   // Drag interaction for touch and mouse
@@ -217,6 +234,24 @@ export const DigitalGrowthEcosystem: React.FC<DigitalGrowthEcosystemProps> = ({
     if (hoveredServiceIndex !== null) return ECOSYSTEM_SERVICES[hoveredServiceIndex];
     return null;
   }, [activeServiceIndex, hoveredServiceIndex]);
+
+  useEffect(() => {
+    if (!videoService) return;
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.dispatchEvent(new CustomEvent('crivorra:video-play', { detail: null }));
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setVideoService(null);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [videoService]);
 
   return (
     <section
@@ -377,6 +412,7 @@ export const DigitalGrowthEcosystem: React.FC<DigitalGrowthEcosystemProps> = ({
                 // Ignore accidental tap if user was dragging to spin
                 if (dragDistanceRef.current > 8) return;
                 setActiveServiceIndex(activeServiceIndex === index ? null : index);
+                if (service.videoUrl) setVideoService(service);
               }}
               tabIndex={0}
               role="button"
@@ -385,6 +421,7 @@ export const DigitalGrowthEcosystem: React.FC<DigitalGrowthEcosystemProps> = ({
                 if (e.key === 'Enter' || e.key === ' ') {
                   e.preventDefault();
                   setActiveServiceIndex(activeServiceIndex === index ? null : index);
+                  if (service.videoUrl) setVideoService(service);
                 }
               }}
             >
@@ -502,6 +539,61 @@ export const DigitalGrowthEcosystem: React.FC<DigitalGrowthEcosystemProps> = ({
           </div>
         )}
       </div>
+
+      {videoService?.videoUrl && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-[#0A0F1D]/85 p-3 backdrop-blur-md sm:p-6"
+          onClick={() => setVideoService(null)}
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="service-video-title"
+            data-lenis-prevent="true"
+            className="w-full max-w-4xl overflow-hidden rounded-2xl border border-slate-700 bg-slate-950 shadow-2xl sm:rounded-3xl"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="flex items-center justify-between gap-3 border-b border-slate-800 bg-slate-900 px-4 py-3 sm:px-5">
+              <div className="flex min-w-0 items-center gap-3">
+                <span className="flex h-7 w-8 shrink-0 items-center justify-center rounded-md bg-[#0066FF] font-mono-code text-xs font-bold text-white">
+                  {videoService.number}
+                </span>
+                <h3
+                  id="service-video-title"
+                  className="truncate font-display text-sm font-bold text-white sm:text-base"
+                >
+                  {videoService.title}
+                </h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setVideoService(null)}
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-slate-800 text-slate-300 transition-colors hover:bg-red-500/20 hover:text-white"
+                aria-label="Close video"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            <div className="aspect-video w-full bg-black">
+              <video
+                key={videoService.id}
+                src={videoService.videoUrl}
+                controls
+                autoPlay
+                playsInline
+                className="h-full w-full bg-black object-contain"
+                onPlay={(event) => {
+                  window.dispatchEvent(
+                    new CustomEvent('crivorra:video-play', {
+                      detail: event.currentTarget,
+                    }),
+                  );
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
