@@ -108,6 +108,7 @@ export const ECOSYSTEM_SERVICES: EcosystemServiceItem[] = [
     borderHover: 'hover:border-[#0080FB]/80',
     bgGlow: 'from-[#0080FB]/15 to-[#00D2FF]/5',
     icon: Target,
+    videoUrl: q3Video,
   },
   {
     id: 'google-ad-run',
