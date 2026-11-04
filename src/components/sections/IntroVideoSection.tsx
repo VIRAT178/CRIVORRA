@@ -1,9 +1,12 @@
 import React from 'react';
+import { Play } from 'lucide-react';
 import crivorraDigitalsVideo from '../../../Crivorra Digitals.mp4';
 
 export const IntroVideoSection: React.FC = () => {
   const videoRef = React.useRef<HTMLVideoElement | null>(null);
   const [playbackError, setPlaybackError] = React.useState(false);
+  const [isPlaying, setIsPlaying] = React.useState(false);
+  const [isMuted, setIsMuted] = React.useState(true);
 
   React.useEffect(() => {
     const handleOtherVideoPlay = (event: Event) => {
@@ -17,71 +20,70 @@ export const IntroVideoSection: React.FC = () => {
     return () => window.removeEventListener('crivorra:video-play', handleOtherVideoPlay);
   }, []);
 
+  const handlePlayWithSound = async () => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.muted = false;
+    setIsMuted(false);
+    try {
+      await video.play();
+      setPlaybackError(false);
+    } catch {
+      video.muted = true;
+      setIsMuted(true);
+      setPlaybackError(true);
+    }
+  };
+
   return (
     <section
       id="home"
       aria-labelledby="crivorra-video-heading"
-      className="relative overflow-hidden bg-white bg-grid-subtle px-4 pb-10 pt-28 text-[#0A0F1D] sm:px-6 sm:pb-12 sm:pt-32 lg:px-8"
+      className="relative w-full overflow-hidden bg-black pt-20 text-[#0A0F1D] sm:pt-24"
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_35%,rgba(0,102,255,0.18),transparent_58%)]" />
-
-      <div className="relative mx-auto max-w-screen-2xl text-center">
-        <div className="mx-auto max-w-7xl">
-          <div className="mx-auto w-full max-w-[280px] rounded-[2.25rem] border border-slate-600/70 bg-slate-700 p-2 shadow-[0_24px_70px_-28px_rgba(0,102,255,0.4)] sm:max-w-none sm:rounded-3xl sm:p-2">
-            <div className="flex h-9 items-center justify-between px-2 sm:h-10 sm:px-3">
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <span className="h-2.5 w-2.5 rounded-full bg-orange-500 sm:h-3 sm:w-3" />
-                <span className="h-2.5 w-2.5 rounded-full bg-yellow-400 sm:h-3 sm:w-3" />
-                <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 sm:h-3 sm:w-3" />
-              </div>
-              <span className="text-[10px] font-semibold tracking-wide text-slate-300 sm:text-sm">
-                CRIVORRA DIGITALS
-              </span>
-              <span className="w-10 sm:w-14" aria-hidden="true" />
-            </div>
-
-            <div className="aspect-[9/16] overflow-hidden rounded-[1.5rem] bg-black sm:aspect-[2.8/1] sm:rounded-2xl">
-              <video
-                ref={videoRef}
-                className="block h-full w-full bg-black object-contain"
-                src={crivorraDigitalsVideo}
-                controls
-                autoPlay
-                muted
-                preload="metadata"
-                playsInline
-                aria-label="Crivorra Digitals introduction video"
-                onClick={(event) => {
-                  const video = event.currentTarget;
-                  if (video.muted) {
-                    video.muted = false;
-                    void video.play().then(
-                      () => setPlaybackError(false),
-                      () => {
-                        video.muted = true;
-                        setPlaybackError(true);
-                      },
-                    );
-                  }
-                }}
-                onPlay={(event) => {
-                  window.dispatchEvent(
-                    new CustomEvent('crivorra:video-play', { detail: event.currentTarget }),
-                  );
-                }}
-              >
-                Your browser does not support the video tag.
-              </video>
-            </div>
-            {playbackError && (
-              <p className="mt-2 text-sm text-red-700" role="alert">
-                Could not start video with sound. Use the video controls to try again.
-              </p>
-            )}
-          </div>
-          <div className="mx-auto hidden h-5 w-1/3 rounded-b-xl bg-gradient-to-b from-slate-700 to-slate-800 sm:block sm:h-7" />
-          <div className="mx-auto hidden h-2 w-2/3 rounded-full bg-slate-700 sm:block sm:h-3" />
-        </div>
+      <h1 id="crivorra-video-heading" className="sr-only">
+        Crivorra Digitals introduction
+      </h1>
+      <div className="relative w-full bg-black">
+        <video
+          ref={videoRef}
+          className="block aspect-video w-full bg-black object-contain"
+          src={crivorraDigitalsVideo}
+          controls={isPlaying}
+          preload="metadata"
+          playsInline
+          muted={isMuted}
+          aria-label="Crivorra Digitals introduction video"
+          onPlay={(event) => {
+            setIsPlaying(true);
+            window.dispatchEvent(
+              new CustomEvent('crivorra:video-play', { detail: event.currentTarget }),
+            );
+          }}
+          onPause={() => setIsPlaying(false)}
+          onEnded={() => setIsPlaying(false)}
+        >
+          Your browser does not support the video tag.
+        </video>
+        {!isPlaying && (
+          <button
+            type="button"
+            onClick={handlePlayWithSound}
+            className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#0066FF] text-white shadow-[0_0_40px_rgba(0,102,255,0.55)] transition-transform hover:scale-110 focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-white sm:h-20 sm:w-20"
+            aria-label="Play introduction video with sound"
+          >
+            <Play className="ml-1 h-8 w-8 fill-current sm:h-9 sm:w-9" />
+          </button>
+        )}
+        {playbackError && (
+          <p
+            className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-lg bg-black/80 px-4 py-2 text-center text-sm text-white"
+            role="alert"
+          >
+            Could not start video with sound. Please try again.
+          </p>
+        )}
       </div>
     </section>
   );
