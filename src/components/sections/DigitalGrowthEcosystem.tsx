@@ -17,8 +17,9 @@ import q2Video from '../../../Q2.mp4';
 import q3Video from '../../../Q3.mp4';
 import q4Video from '../../../Q4.mp4';
 import q5Video from '../../../Q5.mp4';
-import q6Video from '../../../Q6.mp4';
 import digitalmarketingVideo from '../../../Crivorra Digitals.mp4';
+import metaAdRunVideo from '../../../META AD RUN.mp4';
+import googleAdsRunVideo from '../../../GOOGLE ADS RUN.mp4';
 
 interface DigitalGrowthEcosystemProps {
   onOpenProjectPlanner?: () => void;
@@ -108,7 +109,7 @@ export const ECOSYSTEM_SERVICES: EcosystemServiceItem[] = [
     borderHover: 'hover:border-[#0080FB]/80',
     bgGlow: 'from-[#0080FB]/15 to-[#00D2FF]/5',
     icon: Target,
-    videoUrl: q3Video,
+    videoUrl: metaAdRunVideo,
   },
   {
     id: 'google-ad-run',
@@ -122,7 +123,7 @@ export const ECOSYSTEM_SERVICES: EcosystemServiceItem[] = [
     borderHover: 'hover:border-[#EA4335]/80',
     bgGlow: 'from-[#EA4335]/15 to-[#FBBC05]/5',
     icon: TrendingUp,
-    videoUrl: q6Video,
+    videoUrl: googleAdsRunVideo,
   },
   {
     id: 'geo-aeo',
