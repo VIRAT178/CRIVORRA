@@ -56,9 +56,9 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <>
       <header
-        className={`fixed top-0 inset-x-0 z-40 glass-light transition-all duration-300 ${
+        className={`fixed top-0 inset-x-0 z-40 border-b border-slate-200 bg-white transition-all duration-300 ${
           isScrolled || isMobileMenuOpen
-            ? 'py-2.5 shadow-sm shadow-slate-900/5'
+            ? 'py-2.5 shadow-sm shadow-slate-900/10'
             : 'py-3.5 sm:py-4'
         }`}
       >
@@ -87,7 +87,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Center: Desktop Navigation Links */}
           <div className="hidden lg:flex items-center justify-center">
-            <nav className="flex items-center gap-1 xl:gap-2 px-3.5 py-2 rounded-full bg-white/80 backdrop-blur-md border border-slate-200/90 shadow-xs">
+            <nav className="flex items-center gap-1 xl:gap-2 px-3.5 py-2 rounded-full border border-slate-200 bg-white shadow-xs">
               {navLinks.map((link) => (
                 <a
                   key={link.label}
@@ -114,7 +114,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               className={`hidden lg:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold transition-all duration-200 cursor-pointer group whitespace-nowrap shadow-xs ${
                 currentPage === 'about-crivorra'
                   ? 'bg-gradient-to-r from-[#0066FF] to-[#7928CA] text-white shadow-blue-500/20 shadow-md'
-                  : 'bg-white/90 hover:bg-white text-[#0A0F1D] border border-slate-200/90 hover:border-[#0066FF]/50 hover:text-[#0066FF] hover:shadow-sm'
+                  : 'bg-white hover:bg-slate-50 text-[#0A0F1D] border border-slate-200 hover:border-[#0066FF]/50 hover:text-[#0066FF] hover:shadow-sm'
               }`}
             >
               <span>About Crivorra</span>
@@ -129,7 +129,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="flex items-center gap-2 lg:hidden">
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/90 border border-slate-200 text-slate-800 hover:bg-slate-100 transition-colors cursor-pointer shadow-xs"
+                className="w-10 h-10 flex items-center justify-center rounded-xl bg-white border border-slate-200 text-slate-800 hover:bg-slate-100 transition-colors cursor-pointer shadow-xs"
                 aria-label="Toggle menu"
               >
                 {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
