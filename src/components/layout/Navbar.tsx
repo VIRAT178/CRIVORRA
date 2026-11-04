@@ -56,10 +56,10 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <>
       <header
-        className={`fixed top-0 inset-x-0 z-40 transition-all duration-300 ${
+        className={`fixed top-0 inset-x-0 z-40 glass-light transition-all duration-300 ${
           isScrolled || isMobileMenuOpen
-            ? 'py-2.5 glass-light shadow-sm shadow-slate-900/5'
-            : 'py-3.5 sm:py-4 bg-transparent'
+            ? 'py-2.5 shadow-sm shadow-slate-900/5'
+            : 'py-3.5 sm:py-4'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between relative">
